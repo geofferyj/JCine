@@ -1,3 +1,4 @@
 <resources>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="margin_rv_text">20dp</dimen>
 </resources>

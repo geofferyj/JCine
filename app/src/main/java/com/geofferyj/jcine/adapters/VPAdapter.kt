@@ -1,4 +1,4 @@
-package com.geofferyj.jcine
+package com.geofferyj.jcine.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        tools:context=".fragments.MoviesFragment">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_rv_text"
+            android:layout_marginBottom="@dimen/margin_rv_text"
+            android:text="@string/new_release"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <com.geofferyj.jcine.NestedScrollableHost
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_new_release"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/rv_item">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </com.geofferyj.jcine.NestedScrollableHost>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_rv_text"
+            android:layout_marginBottom="@dimen/margin_rv_text"
+            android:text="@string/coming_soon"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <com.geofferyj.jcine.NestedScrollableHost
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_coming_soon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/rv_item">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </com.geofferyj.jcine.NestedScrollableHost>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_rv_text"
+            android:layout_marginBottom="@dimen/margin_rv_text"
+            android:text="@string/popular"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <com.geofferyj.jcine.NestedScrollableHost
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_popular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/rv_item" />
+        </com.geofferyj.jcine.NestedScrollableHost>
+    </LinearLayout>
+</ScrollView>
