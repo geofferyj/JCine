@@ -3,7 +3,7 @@ package com.geofferyj.jcine.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.geofferyj.jcine.Movie
+import com.geofferyj.jcine.misc.Movie
 import com.geofferyj.jcine.R
 import com.geofferyj.jcine.adapters.RVAdapter
 import kotlinx.android.synthetic.main.fragment_content.*

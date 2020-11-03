@@ -1,4 +1,4 @@
-package com.geofferyj.jcine
+package com.geofferyj.jcine.misc
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent

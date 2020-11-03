@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.geofferyj.jcine.R
 import kotlinx.android.synthetic.main.hero_item.view.*
@@ -16,12 +17,9 @@ class HeroAdapter(private val images: List<Int>): RecyclerView.Adapter<HeroAdapt
 
         init {
             heroImage.setOnClickListener{
-                val position = adapterPosition
-                Toast.makeText(
-                    item.context,
-                    "Item at position $position was clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
+                heroImage.setOnClickListener {
+                    heroImage.findNavController().navigate(R.id.action_firstPageFragment_to_detailsFragment)
+                }
             }
         }
 
@@ -37,6 +35,6 @@ class HeroAdapter(private val images: List<Int>): RecyclerView.Adapter<HeroAdapt
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return images.size
     }
 }

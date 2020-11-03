@@ -3,15 +3,17 @@ package com.geofferyj.jcine.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.geofferyj.jcine.misc.Movie
 import com.geofferyj.jcine.R
 import com.geofferyj.jcine.adapters.RVAdapter
-import kotlinx.android.synthetic.main.fragment_content.*
+import com.geofferyj.jcine.misc.Movie
+import kotlinx.android.synthetic.main.fragment_details.*
 
-class ShowsFragment : Fragment(R.layout.fragment_content) {
+
+class DetailsFragment : Fragment(R.layout.fragment_details) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movieImage:Int = R.drawable.image3
+        val movieImage:Int = R.drawable.imdb_play_icon
         val movies: List<Movie> = listOf(
             Movie("Movie One", movieImage),
             Movie("Movie One", movieImage),
@@ -28,9 +30,6 @@ class ShowsFragment : Fragment(R.layout.fragment_content) {
             Movie("Movie One", movieImage),
         )
 
-        rv_coming_soon.adapter = RVAdapter(movies)
-        rv_new_release.adapter = RVAdapter(movies)
-        rv_popular.adapter = RVAdapter(movies)
+        cast.adapter = RVAdapter(movies)
     }
-
 }

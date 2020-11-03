@@ -6,6 +6,9 @@
     <string name="new_release">New Release</string>
     <string name="coming_soon">Coming Soon</string>
     <string name="popular">Popular</string>
-    <string name="apply_promo_code">"Apply promo code\nfor offer "</string>
+    <string name="apply_promo_code">"Apply promo code"</string>
     <string name="watch_trailer">Watch Trailer</string>
+    <string name="for_offer">for offer</string>
+    <string name="dot">\u0020\u00B7\u0020</string>
+    <string name="description">Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.</string>
 </resources>

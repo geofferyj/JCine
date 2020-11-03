@@ -1,4 +1,4 @@
-package com.geofferyj.jcine
+package com.geofferyj.jcine.misc
 
 import android.net.Uri
 

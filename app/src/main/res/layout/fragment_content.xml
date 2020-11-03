@@ -27,7 +27,7 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <com.geofferyj.jcine.NestedScrollableHost
+        <com.geofferyj.jcine.misc.NestedScrollableHost
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -43,7 +43,7 @@
 
 
             </androidx.recyclerview.widget.RecyclerView>
-        </com.geofferyj.jcine.NestedScrollableHost>
+        </com.geofferyj.jcine.misc.NestedScrollableHost>
 
         <TextView
             android:id="@+id/textView5"
@@ -55,7 +55,7 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <com.geofferyj.jcine.NestedScrollableHost
+        <com.geofferyj.jcine.misc.NestedScrollableHost
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -70,7 +70,7 @@
                 tools:listitem="@layout/rv_item">
 
             </androidx.recyclerview.widget.RecyclerView>
-        </com.geofferyj.jcine.NestedScrollableHost>
+        </com.geofferyj.jcine.misc.NestedScrollableHost>
 
         <TextView
             android:id="@+id/textView6"
@@ -82,7 +82,7 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <com.geofferyj.jcine.NestedScrollableHost
+        <com.geofferyj.jcine.misc.NestedScrollableHost
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -95,6 +95,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="20"
                 tools:listitem="@layout/rv_item" />
-        </com.geofferyj.jcine.NestedScrollableHost>
+        </com.geofferyj.jcine.misc.NestedScrollableHost>
     </LinearLayout>
 </ScrollView>

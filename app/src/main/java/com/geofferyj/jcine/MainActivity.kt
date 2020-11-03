@@ -16,29 +16,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val images = listOf<Int>(
-            R.drawable.image2,
-            R.drawable.image3,
-            R.drawable.image4,
-            R.drawable.image5,
-        )
 
-        val fragments = listOf<Fragment>(MoviesFragment(), ShowsFragment(), DramaFragment())
-
-        hero_viewpager.adapter = HeroAdapter(images)
-        TabLayoutMediator(hero_tabs, hero_viewpager){ _, _ ->
-        }.attach()
-
-
-
-
-        content_viewpager.adapter = VPAdapter(supportFragmentManager, lifecycle, fragments)
-        TabLayoutMediator(content_tabLayout, content_viewpager){tab, position ->
-            when(position){
-                0 -> tab.text = "Movies"
-                1 -> tab.text = "Shows"
-                2 -> tab.text = "Drama"
-            }
-        }.attach()
     }
 }

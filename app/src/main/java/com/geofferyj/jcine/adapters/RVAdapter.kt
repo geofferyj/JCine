@@ -1,13 +1,15 @@
 package com.geofferyj.jcine.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.geofferyj.jcine.Movie
+import com.geofferyj.jcine.misc.Movie
 import com.geofferyj.jcine.R
 
 class RVAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<RVAdapter.RVViewHolder>() {
@@ -19,12 +21,7 @@ class RVAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<RVAdapte
 
         init {
             item.setOnClickListener {
-                val position = adapterPosition
-                Toast.makeText(
-                    item.context,
-                    "Item at position $position was clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
+                item.findNavController().navigate(R.id.action_firstPageFragment_to_detailsFragment)
             }
         }
 
