@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/firstPageFragment"
-        android:name="com.geofferyj.jcine.fragments.FirstPageFragment"
+        android:name="com.geofferyj.jcine.view.fragments.FirstPageFragment"
         android:label="fragment_first_page"
         tools:layout="@layout/fragment_first_page" >
         <action
@@ -16,7 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.geofferyj.jcine.fragments.DetailsFragment"
+        android:name="com.geofferyj.jcine.view.fragments.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="movie_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

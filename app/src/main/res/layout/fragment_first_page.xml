@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".fragments.FirstPageFragment">
+    tools:context=".view.fragments.FirstPageFragment">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -66,12 +66,14 @@
         android:padding="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:layout_marginLeft="10dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
         app:layout_constraintEnd_toStartOf="@+id/notif"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        android:layout_marginStart="10dp" />
 
 
     <androidx.cardview.widget.CardView
@@ -102,12 +104,16 @@
 
 
             android:layout_gravity="bottom|center"
+            android:background="@null"
             app:tabBackground="@drawable/tab_default"
-            app:tabGravity="center"
             app:tabIndicator="@drawable/tab_selected"
             app:tabIndicatorColor="@color/colorWhite"
-            app:tabIndicatorGravity="center"
+            app:tabIndicatorGravity="stretch"
             tools:tabIndicatorColor="@color/colorPrimary">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
@@ -176,4 +182,23 @@
         app:layout_constraintTop_toTopOf="@+id/search"
         app:srcCompat="@drawable/notif_icon" />
 
+
+    <RelativeLayout
+        android:id="@+id/loader"
+        android:elevation="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/loader_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
