@@ -33,15 +33,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hero_image"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/holder"
@@ -123,7 +122,9 @@
                     android:layout_width="20dp"
                     android:layout_height="10dp"
                     android:layout_alignTop="@+id/tv2"
-                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="3dp"
                     android:layout_toEndOf="@+id/tv2"
                     android:layout_toRightOf="@+id/tv2"
                     android:scaleType="centerCrop"
@@ -185,8 +186,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/movie_type_bg"
                 android:text="3D"
-                app:layout_constraintStart_toEndOf="@+id/_2d"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"                app:layout_constraintStart_toEndOf="@+id/_2d"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
 
             <TextView
@@ -194,8 +197,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/movie_type_bg"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:text="Imax"
                 app:layout_constraintStart_toEndOf="@+id/_3d"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
@@ -205,16 +210,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/movie_type_bg"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:text="2D"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
 
             <ImageView
                 android:id="@+id/imdb_icon"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitStart"
                 android:src="@drawable/imdb_logo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/_2d" />
@@ -223,8 +231,7 @@
                 android:id="@+id/imdb_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="3dp"
                 android:layout_marginTop="16dp"
                 android:text="- 7/10"
                 app:layout_constraintStart_toEndOf="@+id/imdb_icon"
@@ -334,6 +341,7 @@
         android:id="@+id/loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:visibility="gone"
         android:background="@drawable/loader_bg">
 
         <ProgressBar

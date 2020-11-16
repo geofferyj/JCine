@@ -38,6 +38,9 @@ class DramaFragment : Fragment(R.layout.fragment_content) {
                 is Resource.Error -> {
                     response.message?.let { Log.i(Constants.RESPONSE_TAG, "Error with message: $it") }
                 }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
+                }
                 is Resource.Loading -> {
                     Log.i(Constants.RESPONSE_TAG, "Loading")
                 }
@@ -58,6 +61,9 @@ class DramaFragment : Fragment(R.layout.fragment_content) {
                 is Resource.Error -> {
                     response.message?.let { Log.i(Constants.RESPONSE_TAG, "Error with message: $it") }
                 }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
+                }
                 is Resource.Loading -> {
                     Log.i(Constants.RESPONSE_TAG, "Loading")
                 }
@@ -77,6 +83,9 @@ class DramaFragment : Fragment(R.layout.fragment_content) {
                 }
                 is Resource.Error -> {
                     response.message?.let { Log.i(Constants.RESPONSE_TAG, "Error with message: $it") }
+                }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     Log.i(Constants.RESPONSE_TAG, "Loading")

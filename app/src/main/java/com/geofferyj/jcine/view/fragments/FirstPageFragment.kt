@@ -3,6 +3,7 @@ package com.geofferyj.jcine.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,6 +36,7 @@ class FirstPageFragment : Fragment(R.layout.fragment_first_page) {
         TabLayoutMediator(hero_tabs, hero_viewpager) { _, _ ->
         }.attach()
 
+
         viewModel.moviesTrending.observe(viewLifecycleOwner, Observer { response ->
 
             when (response) {
@@ -43,11 +45,13 @@ class FirstPageFragment : Fragment(R.layout.fragment_first_page) {
                     response.data?.let {
 
                         Log.i(Constants.RESPONSE_TAG, "success data: $it")
-                        hAdapter.differ.submitList(it.movies.take(10))
+                        hAdapter.differ.submitList(it.movies.take(5))
 
-                        hAdapter.setOnItemClickListener {movie ->
+                        hAdapter.setOnItemClickListener { movie ->
                             val action =
-                                FirstPageFragmentDirections.actionFirstPageFragmentToDetailsFragment(movie.id)
+                                FirstPageFragmentDirections.actionFirstPageFragmentToDetailsFragment(
+                                    movie.id
+                                )
                             findNavController().navigate(action)
 
 
@@ -66,6 +70,9 @@ class FirstPageFragment : Fragment(R.layout.fragment_first_page) {
                 }
                 is Resource.Loading -> {
                     Log.i(Constants.RESPONSE_TAG, "Loading")
+                }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
                 }
             }
 

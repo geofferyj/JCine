@@ -2,23 +2,21 @@ package com.geofferyj.jcine.view.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.geofferyj.jcine.R
 import com.geofferyj.jcine.models.repository.Repository
 import com.geofferyj.jcine.utils.Constants
+import com.geofferyj.jcine.utils.NoInternetException
 import com.geofferyj.jcine.utils.Resource
 import com.geofferyj.jcine.view.MainActivity
 import com.geofferyj.jcine.view.adapters.CastAdapter
 import com.geofferyj.jcine.viewmodel.MoviesViewModel
-import kotlinx.android.synthetic.main.fragment_content.*
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -32,13 +30,19 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     private val args by navArgs<DetailsFragmentArgs>()
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = (activity as MainActivity).viewModel
 
-        getMovieDetails(args.movieId)
+        if (viewModel.isInternetAvailable(requireContext())){
+
+            getMovieDetails(args.movieId)
+        } else {
+            viewModel.movieDetails.postValue(Resource.NetworkError("No Internet Connection"))
+
+
+        }
 
         viewModel.movieDetails.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -75,6 +79,9 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                         )
                     }
                 }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
+                }
                 is Resource.Loading -> {
                     loader.visibility = View.VISIBLE
                     Log.i(Constants.RESPONSE_TAG, "Loading Details")
@@ -91,10 +98,13 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     }
 
     private fun getMovieDetails(id: Int) = GlobalScope.launch(Dispatchers.IO) {
-
-        viewModel.movieDetails.postValue(Resource.Loading())
-        val response = Repository().getMovieDetails(id)
-        viewModel.movieDetails.postValue(viewModel.handleResponse(response))
+        try {
+            viewModel.movieDetails.postValue(Resource.Loading())
+            val response = Repository().getMovieDetails(id)
+            viewModel.movieDetails.postValue(viewModel.handleResponse(response))
+        } catch (e: NoInternetException) {
+            viewModel.movieDetails.postValue(Resource.NetworkError("Internet not available"))
+        }
 
     }
 

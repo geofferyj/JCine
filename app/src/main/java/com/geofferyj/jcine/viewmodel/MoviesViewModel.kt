@@ -1,18 +1,24 @@
 package com.geofferyj.jcine.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.geofferyj.jcine.models.MovieDetails
 import com.geofferyj.jcine.models.MovieModel
 import com.geofferyj.jcine.models.repository.Repository
+import com.geofferyj.jcine.utils.NoInternetException
 import com.geofferyj.jcine.utils.Resource
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MoviesViewModel(application: Application, val repository: Repository) :
-    AndroidViewModel(application) {
+class MoviesViewModel(val app: Application, val repository: Repository) :
+    AndroidViewModel(app) {
 
     val moviesComingSoon: MutableLiveData<Resource<MovieModel>> = MutableLiveData()
     val movieDetails: MutableLiveData<Resource<MovieDetails>> = MutableLiveData()
@@ -28,16 +34,32 @@ class MoviesViewModel(application: Application, val repository: Repository) :
 
     init {
 
-        getMovieComingSoon()
-        getMovieNewRelease()
-        getMoviePopular()
-        getMovieTrending()
-        getTVPopular()
-        getTVComingSoon()
-        getTVNewRelease()
+        if (isInternetAvailable(app.applicationContext)) {
+
+            getMovieComingSoon()
+            getMovieNewRelease()
+            getMoviePopular()
+            getMovieTrending()
+            getTVPopular()
+            getTVComingSoon()
+            getTVNewRelease()
+        } else{
+
+            moviesComingSoon.postValue(Resource.NetworkError("No Internet Connection"))
+            movieDetails.postValue(Resource.NetworkError("No Internet Connection"))
+            moviesPopular.postValue(Resource.NetworkError("No Internet Connection"))
+            moviesNewRelease.postValue(Resource.NetworkError("No Internet Connection"))
+            moviesTrending.postValue(Resource.NetworkError("No Internet Connection"))
+            tvPopular.postValue(Resource.NetworkError("No Internet Connection"))
+            tvNewRelease.postValue(Resource.NetworkError("No Internet Connection"))
+            tvComingSoon.postValue(Resource.NetworkError("No Internet Connection"))
+            tvDetails.postValue(Resource.NetworkError("No Internet Connection"))
+
+        }
     }
 
-    fun getMovieComingSoon() = viewModelScope.launch(Dispatchers.IO) {
+
+    private fun getMovieComingSoon() = viewModelScope.launch(Dispatchers.IO) {
 
         moviesComingSoon.postValue(Resource.Loading())
         val response = repository.getMovieComingSoon()
@@ -46,17 +68,17 @@ class MoviesViewModel(application: Application, val repository: Repository) :
     }
 
 
-    fun getMoviePopular() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getMoviePopular() = viewModelScope.launch(Dispatchers.IO) {
 
         moviesPopular.postValue(Resource.Loading())
         val response = repository.getMoviePopular()
         moviesPopular.postValue(handleResponse(response))
+
     }
 
 
+    private fun getMovieTrending() = viewModelScope.launch(Dispatchers.IO) {
 
-
-    fun getMovieTrending() = viewModelScope.launch(Dispatchers.IO) {
 
         moviesTrending.postValue(Resource.Loading())
         val response = repository.getMovieTrending()
@@ -64,7 +86,7 @@ class MoviesViewModel(application: Application, val repository: Repository) :
 
     }
 
-    fun getMovieNewRelease() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getMovieNewRelease() = viewModelScope.launch(Dispatchers.IO) {
 
         moviesNewRelease.postValue(Resource.Loading())
         val response = repository.getMovieNewRelease()
@@ -73,29 +95,30 @@ class MoviesViewModel(application: Application, val repository: Repository) :
     }
 
 
-
-
-    fun getTVPopular() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getTVPopular() = viewModelScope.launch(Dispatchers.IO) {
 
         tvPopular.postValue(Resource.Loading())
         val response = repository.getTvPopular()
         tvPopular.postValue(handleResponse(response))
+
     }
 
 
-    fun getTVNewRelease() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getTVNewRelease() = viewModelScope.launch(Dispatchers.IO) {
 
         tvNewRelease.postValue(Resource.Loading())
         val response = repository.getTvNewRelease()
         tvNewRelease.postValue(handleResponse(response))
+
     }
 
 
-    fun getTVComingSoon() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getTVComingSoon() = viewModelScope.launch(Dispatchers.IO) {
 
         tvComingSoon.postValue(Resource.Loading())
         val response = repository.getTvComingSoon()
         tvComingSoon.postValue(handleResponse(response))
+
     }
 
 
@@ -104,12 +127,12 @@ class MoviesViewModel(application: Application, val repository: Repository) :
         tvDetails.postValue(Resource.Loading())
         val response = repository.getTVDetails(id)
         tvDetails.postValue(handleResponse(response))
+
     }
 
 
-
-
     fun <T> handleResponse(response: Response<T>): Resource<T> {
+
         if (response.isSuccessful) {
             response.body()?.let {
                 return Resource.Success(it)
@@ -117,6 +140,38 @@ class MoviesViewModel(application: Application, val repository: Repository) :
         }
 
         return Resource.Error(response.message())
+
+    }
+
+    fun isInternetAvailable(context: Context): Boolean {
+        var result = false
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val networkCapabilities = connectivityManager.activeNetwork ?: return false
+            val actNw =
+                connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+            result = when {
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            connectivityManager.run {
+                connectivityManager.activeNetworkInfo?.run {
+                    result = when (type) {
+                        ConnectivityManager.TYPE_WIFI -> true
+                        ConnectivityManager.TYPE_MOBILE -> true
+                        ConnectivityManager.TYPE_ETHERNET -> true
+                        else -> false
+                    }
+
+                }
+            }
+        }
+
+        return result
     }
 
 }

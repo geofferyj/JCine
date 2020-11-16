@@ -3,6 +3,7 @@ package com.geofferyj.jcine.view.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -48,6 +49,9 @@ class MoviesFragment : Fragment(R.layout.fragment_content) {
                 }
                 is Resource.Error -> {
                 }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
+                }
                 is Resource.Loading -> {
                     Log.i(RESPONSE_TAG, "Loading")
                 }
@@ -71,6 +75,9 @@ class MoviesFragment : Fragment(R.layout.fragment_content) {
                 }
                 is Resource.Error -> {
                 }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
+                }
                 is Resource.Loading -> {
                     Log.i(RESPONSE_TAG, "Loading")
                 }
@@ -93,6 +100,9 @@ class MoviesFragment : Fragment(R.layout.fragment_content) {
                     }
                 }
                 is Resource.Error -> {
+                }
+                is Resource.NetworkError -> {
+                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     Log.i(RESPONSE_TAG, "Loading")
