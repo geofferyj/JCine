@@ -17,7 +17,7 @@ data class MovieDetails(
     @SerializedName("overview")
     val overview: String,
 
-    @SerializedName("release_date")
+    @SerializedName("release_date", alternate = ["first_air_date"])
     val releaseDate: String,
 
     @SerializedName("runtime")
@@ -26,10 +26,10 @@ data class MovieDetails(
     @SerializedName("status")
     val status: String,
 
-    @SerializedName("title")
+    @SerializedName("title", alternate = ["name"])
     val title: String,
 
-    @SerializedName("credits")
+    @SerializedName("credits", alternate= ["aggregate_credits"])
     val credits: Credits,
 
     @SerializedName("spoken_languages")

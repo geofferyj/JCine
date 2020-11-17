@@ -72,10 +72,10 @@ interface ApiService {
     ): Response<MovieModel>
 
     @GET("tv/{id}")
-    suspend fun getTVDetails(
+    suspend fun getTvDetails(
         @Path("id") id: Int,
         @Query("api_key") ApiKey: String = API_KEY,
         @Query("language") lang: String = LANG,
-        @Query("append_to_response") cast: String = "credits"
+        @Query("append_to_response") cast: String = "aggregate_credits"
     ): Response<MovieDetails>
 }

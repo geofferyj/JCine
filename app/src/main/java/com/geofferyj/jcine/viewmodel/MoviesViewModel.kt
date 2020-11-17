@@ -5,15 +5,19 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.geofferyj.jcine.models.MovieDetails
 import com.geofferyj.jcine.models.MovieModel
 import com.geofferyj.jcine.models.repository.Repository
+import com.geofferyj.jcine.utils.NetworkConnection
 import com.geofferyj.jcine.utils.NoInternetException
 import com.geofferyj.jcine.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -32,30 +36,36 @@ class MoviesViewModel(val app: Application, val repository: Repository) :
     val tvComingSoon: MutableLiveData<Resource<MovieModel>> = MutableLiveData()
     val tvDetails: MutableLiveData<Resource<MovieDetails>> = MutableLiveData()
 
+
+    val networkConnection = NetworkConnection(app.applicationContext)
+
+
     init {
 
-        if (isInternetAvailable(app.applicationContext)) {
+        networkConnection.observeForever {
+            Log.d("Observer Forever check", this.toString())
+            if (it) {
+                getMovieComingSoon()
+                getMovieNewRelease()
+                getMoviePopular()
+                getMovieTrending()
+                getTVPopular()
+                getTVComingSoon()
+                getTVNewRelease()
+            } else {
+                moviesComingSoon.postValue(Resource.NetworkError("No Internet Connection"))
+                movieDetails.postValue(Resource.NetworkError("No Internet Connection"))
+                moviesPopular.postValue(Resource.NetworkError("No Internet Connection"))
+                moviesNewRelease.postValue(Resource.NetworkError("No Internet Connection"))
+                moviesTrending.postValue(Resource.NetworkError("No Internet Connection"))
+                tvPopular.postValue(Resource.NetworkError("No Internet Connection"))
+                tvNewRelease.postValue(Resource.NetworkError("No Internet Connection"))
+                tvComingSoon.postValue(Resource.NetworkError("No Internet Connection"))
+                tvDetails.postValue(Resource.NetworkError("No Internet Connection"))
 
-            getMovieComingSoon()
-            getMovieNewRelease()
-            getMoviePopular()
-            getMovieTrending()
-            getTVPopular()
-            getTVComingSoon()
-            getTVNewRelease()
-        } else{
-
-            moviesComingSoon.postValue(Resource.NetworkError("No Internet Connection"))
-            movieDetails.postValue(Resource.NetworkError("No Internet Connection"))
-            moviesPopular.postValue(Resource.NetworkError("No Internet Connection"))
-            moviesNewRelease.postValue(Resource.NetworkError("No Internet Connection"))
-            moviesTrending.postValue(Resource.NetworkError("No Internet Connection"))
-            tvPopular.postValue(Resource.NetworkError("No Internet Connection"))
-            tvNewRelease.postValue(Resource.NetworkError("No Internet Connection"))
-            tvComingSoon.postValue(Resource.NetworkError("No Internet Connection"))
-            tvDetails.postValue(Resource.NetworkError("No Internet Connection"))
-
+            }
         }
+
     }
 
 
@@ -94,6 +104,19 @@ class MoviesViewModel(val app: Application, val repository: Repository) :
 
     }
 
+    fun getDetails(id: Int, type:String) = GlobalScope.launch(Dispatchers.IO) {
+        if (type=="tv"){
+            tvDetails.postValue(Resource.Loading())
+            val response = Repository().getTvDetails(id)
+            tvDetails.postValue(handleResponse(response))
+        }else{
+
+            movieDetails.postValue(Resource.Loading())
+            val response = Repository().getMovieDetails(id)
+            movieDetails.postValue(handleResponse(response))
+        }
+    }
+
 
     private fun getTVPopular() = viewModelScope.launch(Dispatchers.IO) {
 
@@ -122,16 +145,7 @@ class MoviesViewModel(val app: Application, val repository: Repository) :
     }
 
 
-    fun getTVDetails(id: Int) = viewModelScope.launch(Dispatchers.IO) {
-
-        tvDetails.postValue(Resource.Loading())
-        val response = repository.getTVDetails(id)
-        tvDetails.postValue(handleResponse(response))
-
-    }
-
-
-    fun <T> handleResponse(response: Response<T>): Resource<T> {
+    private fun <T> handleResponse(response: Response<T>): Resource<T> {
 
         if (response.isSuccessful) {
             response.body()?.let {
@@ -173,5 +187,6 @@ class MoviesViewModel(val app: Application, val repository: Repository) :
 
         return result
     }
+
 
 }

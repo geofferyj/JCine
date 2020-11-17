@@ -11,4 +11,9 @@
     <string name="for_offer">for offer</string>
     <string name="dot">\u0020\u00B7\u0020</string>
     <string name="description">Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.</string>
+    <string name="_3d">3D</string>
+    <string name="imax">Imax</string>
+    <string name="_2d">2D</string>
+    <string name="cast">Cast</string>
+    <string name="book_tickets">Book Tickets</string>
 </resources>

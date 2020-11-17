@@ -5,16 +5,9 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.geofferyj.jcine.R
-import com.geofferyj.jcine.TMDBAPIService.Companion.apiService
-import com.geofferyj.jcine.models.api.RetrofitInstance
 import com.geofferyj.jcine.models.repository.Repository
 import com.geofferyj.jcine.viewmodel.MoviesViewModel
 import com.geofferyj.jcine.viewmodel.MoviesViewModelFactory
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MoviesViewModel
@@ -33,15 +26,6 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
 
-//        GlobalScope.launch(Dispatchers.IO) {
-//            val result = apiService.getPopularMovies()
-//
-//            withContext(Dispatchers.Main) {
-//                retrofit_test.text = result.body().toString()
-//
-//            }
-//
-//        }
 
     }
 }

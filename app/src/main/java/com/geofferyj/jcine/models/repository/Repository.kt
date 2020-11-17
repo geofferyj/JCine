@@ -7,13 +7,9 @@ class Repository {
 
 private val service = RetrofitInstance.api
     suspend fun getMovieComingSoon() = service.getMovieComingSoon()
-
     suspend fun getMovieTrending() = service.getMovieTrending()
-
     suspend fun getMovieDetails(id:Int) = service.getMovieDetails(id)
-
     suspend fun getMovieNewRelease() = service.getMovieNewRelease()
-
     suspend fun getMoviePopular() = service.getMoviePopular()
 
 
@@ -21,5 +17,6 @@ private val service = RetrofitInstance.api
     suspend fun getTvPopular() = service.getTVPopular()
     suspend fun getTvComingSoon() = service.getTVComingSoon()
     suspend fun getTvNewRelease() = service.getTVLatest()
-    suspend fun getTVDetails(id: Int) = service.getTVDetails(id)
+    suspend fun getTvDetails(id: Int) = service.getTvDetails(id)
+
 }

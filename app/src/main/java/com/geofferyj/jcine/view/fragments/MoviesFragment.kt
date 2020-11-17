@@ -50,7 +50,6 @@ class MoviesFragment : Fragment(R.layout.fragment_content) {
                 is Resource.Error -> {
                 }
                 is Resource.NetworkError -> {
-                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     Log.i(RESPONSE_TAG, "Loading")
@@ -76,7 +75,6 @@ class MoviesFragment : Fragment(R.layout.fragment_content) {
                 is Resource.Error -> {
                 }
                 is Resource.NetworkError -> {
-                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     Log.i(RESPONSE_TAG, "Loading")
@@ -102,7 +100,6 @@ class MoviesFragment : Fragment(R.layout.fragment_content) {
                 is Resource.Error -> {
                 }
                 is Resource.NetworkError -> {
-                    Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     Log.i(RESPONSE_TAG, "Loading")

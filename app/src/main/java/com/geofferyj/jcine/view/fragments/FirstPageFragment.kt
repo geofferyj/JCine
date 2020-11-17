@@ -44,7 +44,6 @@ class FirstPageFragment : Fragment(R.layout.fragment_first_page) {
                     loader.visibility = View.INVISIBLE
                     response.data?.let {
 
-                        Log.i(Constants.RESPONSE_TAG, "success data: $it")
                         hAdapter.differ.submitList(it.movies.take(5))
 
                         hAdapter.setOnItemClickListener { movie ->
@@ -69,7 +68,6 @@ class FirstPageFragment : Fragment(R.layout.fragment_first_page) {
                     }
                 }
                 is Resource.Loading -> {
-                    Log.i(Constants.RESPONSE_TAG, "Loading")
                 }
                 is Resource.NetworkError -> {
                     Toast.makeText(requireContext(), "no internet", Toast.LENGTH_SHORT).show()

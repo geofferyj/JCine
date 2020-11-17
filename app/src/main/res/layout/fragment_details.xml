@@ -14,13 +14,14 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/imdb_play_icon" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -67,10 +67,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
                     app:srcCompat="@drawable/promo_star" />
 
                 <TextView
@@ -78,7 +76,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/promo_logo"
-                    android:layout_toRightOf="@id/promo_logo"
                     android:text="@string/apply_promo_code"
                     android:textSize="12sp" />
 
@@ -88,7 +85,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView"
                     android:layout_toEndOf="@id/promo_logo"
-                    android:layout_toRightOf="@id/promo_logo"
                     android:text="@string/for_offer"
                     android:textSize="12sp" />
 
@@ -97,7 +93,6 @@
                     android:layout_height="wrap_content"
 
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:background="@drawable/watch_trailer_bg"
                     android:padding="5dp">
 
@@ -105,14 +100,12 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
                         app:srcCompat="@drawable/imdb_play_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
                         android:text="@string/watch_trailer"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -123,10 +116,8 @@
                     android:layout_height="10dp"
                     android:layout_alignTop="@+id/tv2"
                     android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
                     android:layout_marginTop="3dp"
                     android:layout_toEndOf="@+id/tv2"
-                    android:layout_toRightOf="@+id/tv2"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/arrow_fwd" />
             </RelativeLayout>
@@ -136,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Aquaman"
+                tools:text="Aquaman"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -147,9 +138,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:text="U/A"
+                tools:text="U/A"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/movie_name"
@@ -157,23 +147,41 @@
                 app:layout_constraintTop_toTopOf="@+id/movie_name" />
 
 
-            <TextView
+            <com.geofferyj.jcine.view.misc.ExpandableTextView
                 android:id="@+id/description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/description"
+                app:etv_animationDuration="200"
+                app:etv_collapsedLines="4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:text="@string/description" />
+
+
+
+<!--            app:etv_collapsedLines="1"-->
+<!--            app:etv_animationDuration="200"-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/description"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:text="@string/description"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
 
             <TextView
                 android:id="@+id/language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="English"
+                tools:text="English"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -184,10 +192,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/movie_type_bg"
-                android:text="3D"
+                android:text="@string/_3d"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"                app:layout_constraintStart_toEndOf="@+id/_2d"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
@@ -201,7 +208,7 @@
                 android:background="@drawable/movie_type_bg"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="Imax"
+                android:text="@string/imax"
                 app:layout_constraintStart_toEndOf="@+id/_3d"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
 
@@ -213,7 +220,7 @@
                 android:background="@drawable/movie_type_bg"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="2D"
+                android:text="@string/_2d"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
 
@@ -233,7 +240,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="16dp"
-                android:text="- 7/10"
+                tools:text="- 7/10"
                 app:layout_constraintStart_toEndOf="@+id/imdb_icon"
                 app:layout_constraintTop_toBottomOf="@+id/_3d" />
 
@@ -242,8 +249,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Cast"
-                android:textSize="18sp"
+                android:background="@drawable/cast_bg"
+                android:text="@string/cast"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imdb_icon" />
@@ -270,7 +278,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Book Tickets"
+                android:text="@string/book_tickets"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -291,7 +299,7 @@
                     android:id="@+id/release_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2018"
+                    tools:text="2018"
                     android:textSize="12sp"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="167dp" />
@@ -310,7 +318,7 @@
                     android:id="@+id/genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adventure/Action"
+                    tools:text="Adventure/Action"
                     android:textSize="12sp"
                     tools:layout_editor_absoluteX="47dp"
                     tools:layout_editor_absoluteY="167dp" />
@@ -328,12 +336,23 @@
                     android:id="@+id/duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2h 22m"
+                    tools:text="2h 22m"
                     android:textSize="12sp"
                     tools:layout_editor_absoluteX="147dp"
                     tools:layout_editor_absoluteY="167dp" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/read_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Read More"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintEnd_toEndOf="@+id/description"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
